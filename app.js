@@ -46,6 +46,28 @@ const ItemCtrl = (function () {
     getItems: function () {
       return data.items;
     },
+    addItem: function(date, city, venue, contactname,
+        deal, deposit, showtime, arrival) {
+            let ID;
+            // create id
+            if(data.items.length > 0) {
+                ID = data.items[data.items.length -1].id +1;
+            } else {
+                ID = 0;
+            }
+            // number inputs to number
+            deal = parseInt(deal);
+            deposit = parseInt(deposit);
+
+            // create new item
+            newItem = new Item(date, city, venue, contactname,
+                deal, deposit, showtime, arrival);
+
+                // add to items array
+                data.items.push(newItem);
+
+                return newItem;
+        },
     logData: function () {
       return data;
     },
@@ -136,7 +158,15 @@ const App = (function (ItemCtrl, UICtrl) {
       // get form input from UI controller
       const input = UICtrl.getItemInput();
 
-      console.log(input);
+     // check for field inputs
+     if(input.date !== '' && input.city !== '' && input.venue !== '' 
+     && input.contactname !== '' && input.deal !== '' && input.deposit !== '' 
+     && input.showtime !== '' && input.arrival !== '') {
+        // add item
+        const newItem = ItemCtrl.addItem(input.city, input.city, input.venue, 
+            input.contactname, input.deal, input.deposit, input.showtime,
+            input.arrival);
+     }
 
     e.preventDefault();
   };
