@@ -6,12 +6,12 @@
 //  item controller
 const ItemCtrl = (function(){
     // item constructor
-    const Item = function(id, date, city, eventname, name, deal, deposit, showtime, arrival) {
+    const Item = function(id, date, city, venue, contactname, deal, deposit, showtime, arrival) {
         this.id = id;
         this.date = date;
         this.city = city;
-        this.eventname = eventname;
-        this.name = name;
+        this.venue = venue;
+        this.contactname = contactname;
         this.deal = deal;
         this.deposit = deposit;
         this.showtime = showtime;
@@ -22,8 +22,8 @@ const ItemCtrl = (function(){
     // data structure / state
     const data = {
         items: [
-            {id: 0, date: 'March 3', city: 'Atlanta', 
-            eventname: 'Tabernacle', name: 'Scott Orvold', 
+            {id: 0, date: 'March 3', city: 'Atlanta, GA', 
+            venue: 'Tabernacle', contactname: 'Scott Orvold', 
             deal: 10000, deposit: 5000, showtime: 01600, 
             arrival: 01200
             }
@@ -62,11 +62,25 @@ const UICtrl = (function() {
 
             items.forEach(function(item){
                 html += `
-                <li class="collection-item" "id=${item.id}">
-                <strong>${item.date}</strong> <em>${item.city}</em>
-                <a href="#" class="secondary-content">
-                <i class="edit-item fa fa-pencil"></i></a>
-                </li>
+                <div class="card-content">
+                <div class="row">
+                <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
+                <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a></span>
+                <strong>${item.city}</strong>
+                <p>${item.venue}</p>
+                </div>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
+                <strong>City: ${item.city}</strong>
+                <p>Venue: ${item.venue}</p>
+                <p>Contact: ${item.contactname}</p>
+                <p>Deal: ${item.deal}</p>
+                <p>Deposit: ${item.deposit}</p>
+                <p>Set Time: ${item.showtime}</p>
+                <p>Arrival Time: ${item.arrival}</p>
+              </div>
+                </div>
                 `;
             });
 
@@ -88,20 +102,20 @@ const UICtrl = (function() {
 // app controller
 const App = (function(ItemCtrl, UICtrl){
     // load event listeners
-    const loadEventListeners = function(){
-        // get UI selectors
-        const UISelectors = UICtrl.getSelectors();
+    // const loadEventListeners = function(){
+    //     // get UI selectors
+    //     const UISelectors = UICtrl.getSelectors();
 
-        // add item event
-        document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
+    //     // add item event
+    //     document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
 
-        // add item submit
-        const itemAddSubmit = function(e) {
-            console.log('Add');
+    //     // add item submit
+    //     const itemAddSubmit = function(e) {
+    //         console.log('Add');
 
-            e.preventDefault();
-        }
-    }
+    //         e.preventDefault();
+    //     }
+    // }
     // public meothods
     return {
         init: function() {
@@ -114,7 +128,7 @@ const App = (function(ItemCtrl, UICtrl){
             UICtrl.populateItemList(items);
 
             // load event listners
-            loadEventListeners();
+            // loadEventListeners();
         }
     }
 
