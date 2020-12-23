@@ -60,11 +60,12 @@ const ItemCtrl = (function () {
             deposit = parseInt(deposit);
 
             // create new item
-            newItem = new Item(date, city, venue, contactname,
+            newItem = new Item(ID,date, city, venue, contactname,
                 deal, deposit, showtime, arrival);
 
                 // add to items array
                 data.items.push(newItem);
+            
 
                 return newItem;
         },
@@ -138,7 +139,7 @@ const UICtrl = (function () {
         // create div element
         const div = document.createElement('div');
         // add class
-        div.className = 'card-content';
+        div.className = 'card card-content';
         // add id
         div.id = `item-${item.id}`;
         // add html
@@ -194,7 +195,7 @@ const App = (function (ItemCtrl, UICtrl) {
      && input.contactname !== '' && input.deal !== '' && input.deposit !== '' 
      && input.showtime !== '' && input.arrival !== '') {
         // add item
-        const newItem = ItemCtrl.addItem(input.city, input.city, input.venue, 
+        const newItem = ItemCtrl.addItem(input.date, input.city, input.venue, 
             input.contactname, input.deal, input.deposit, input.showtime,
             input.arrival);
 
