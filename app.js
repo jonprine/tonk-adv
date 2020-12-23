@@ -134,6 +134,37 @@ const UICtrl = (function () {
 
         }
     },
+    addListItem: function(item) {
+        // create div element
+        const div = document.createElement('div');
+        // add class
+        div.className = 'card-content';
+        // add id
+        div.id = `item-${item.id}`;
+        // add html
+        div.innerHTML = `
+        <div class="row">
+        <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
+        <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a></span>
+        <strong>${item.city}</strong>
+        <p>${item.venue}</p>
+        </div>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
+        <strong>City: ${item.city}</strong>
+        <p>Venue: ${item.venue}</p>
+        <p>Contact: ${item.contactname}</p>
+        <p>Deal: ${item.deal}</p>
+        <p>Deposit: ${item.deposit}</p>
+        <p>Set Time: ${item.showtime}</p>
+        <p>Arrival Time: ${item.arrival}</p>
+      </div>
+      `;
+        // insert item
+        document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', div);
+
+    },
     getSelectors: function () {
       return UISelectors;
     },
@@ -166,6 +197,9 @@ const App = (function (ItemCtrl, UICtrl) {
         const newItem = ItemCtrl.addItem(input.city, input.city, input.venue, 
             input.contactname, input.deal, input.deposit, input.showtime,
             input.arrival);
+
+        // add item to UI list
+        UICtrl.addListItem(newItem);
      }
 
     e.preventDefault();
