@@ -6,7 +6,10 @@ const ItemCtrl = (function () {
     date,
     city,
     venue,
+    address,
     contactname,
+    phonenumber,
+    email,
     deal,
     deposit,
     showtime,
@@ -16,7 +19,10 @@ const ItemCtrl = (function () {
     this.date = date;
     this.city = city;
     this.venue = venue;
+    this.address = address;
     this.contactname = contactname;
+    this.phonenumber = phonenumber;
+    this.email = email;
     this.deal = deal;
     this.deposit = deposit;
     this.showtime = showtime;
@@ -46,7 +52,7 @@ const ItemCtrl = (function () {
     getItems: function () {
       return data.items;
     },
-    addItem: function(date, city, venue, contactname,
+    addItem: function(date, city, venue, address, contactname, phonenumber, email,
         deal, deposit, showtime, arrival) {
             let ID;
             // create id
@@ -60,7 +66,7 @@ const ItemCtrl = (function () {
             deposit = parseInt(deposit);
 
             // create new item
-            newItem = new Item(ID,date, city, venue, contactname,
+            newItem = new Item(ID,date, city, venue, address, contactname, phonenumber, email,
                 deal, deposit, showtime, arrival);
 
                 // add to items array
@@ -83,7 +89,10 @@ const UICtrl = (function () {
     itemDate: '#item-date',
     itemCity: '#item-city',
     itemVenue: '#item-venue',
+    itemAddress: '#item-address',
     itemContact: '#item-name',
+    itemPhone: '#item-number',
+    itemEmail: '#item-email',
     itemDeal: '#item-deal',
     itemDeposit: '#item-deposit',
     itemShowtime: '#item-showtime',
@@ -127,7 +136,10 @@ const UICtrl = (function () {
             date: document.querySelector(UISelectors.itemDate).value,
             city: document.querySelector(UISelectors.itemCity).value,
             venue: document.querySelector(UISelectors.itemVenue).value,
+            address: document.querySelector(UISelectors.itemAddress).value,
             contactname: document.querySelector(UISelectors.itemContact).value,
+            phonenumber: document.querySelector(UISelectors.itemPhone).value,
+            email: document.querySelector(UISelectors.itemEmail).value,
             deal: document.querySelector(UISelectors.itemDeal).value,
             deposit: document.querySelector(UISelectors.itemDeposit).value,
             showtime: document.querySelector(UISelectors.itemShowtime).value,
@@ -155,7 +167,10 @@ const UICtrl = (function () {
         <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
         <strong>City: ${item.city}</strong>
         <p>Venue: ${item.venue}</p>
+        <p>Address: ${item.address}</p>
         <p>Contact: ${item.contactname}</p>
+        <p>Phone Number: ${item.phonenumber}</p>
+        <p>email: ${item.email}</p>
         <p>Deal: ${item.deal}</p>
         <p>Deposit: ${item.deposit}</p>
         <p>Set Time: ${item.showtime}</p>
@@ -191,13 +206,14 @@ const App = (function (ItemCtrl, UICtrl) {
       const input = UICtrl.getItemInput();
 
      // check for field inputs
-     if(input.date !== '' && input.city !== '' && input.venue !== '' 
-     && input.contactname !== '' && input.deal !== '' && input.deposit !== '' 
+     if(input.date !== '' && input.city !== '' && input.venue !== '' && input.address !== '' 
+     && input.contactname !== '' && input.phonenumber !== '' && input.email !== '' && 
+     input.deal !== '' && input.deposit !== '' 
      && input.showtime !== '' && input.arrival !== '') {
         // add item
         const newItem = ItemCtrl.addItem(input.date, input.city, input.venue, 
-            input.contactname, input.deal, input.deposit, input.showtime,
-            input.arrival);
+            input.address, input.contactname, input.phonenumber, input.email, 
+            input.deal, input.deposit, input.showtime,input.arrival);
 
         // add item to UI list
         UICtrl.addListItem(newItem);
