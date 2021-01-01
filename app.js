@@ -116,6 +116,9 @@ const UICtrl = (function () {
   const UISelectors = {
     itemList: "#item-list",
     addBtn: ".add-btn",
+    updateBtn: ".update-btn",
+    deleteBtn: ".delete-btn",
+    backBtn: ".back-btn",
     itemDate: "#item-date",
     itemCity: "#item-city",
     itemVenue: "#item-venue",
@@ -227,6 +230,10 @@ const UICtrl = (function () {
     },
     clearEditState: function () {
       UICtrl.clearInput();
+      document.querySelector(UISelectors.updateBtn).style.display = 'none';
+      document.querySelector(UISelectors.deleteBtn).style.display = 'none';
+      document.querySelector(UISelectors.backBtn).style.display = 'none';
+      document.querySelector(UISelectors.addBtn).style.display = 'inline';
     },
     getSelectors: function () {
       return UISelectors;
@@ -293,9 +300,10 @@ const App = (function (ItemCtrl, UICtrl) {
   // public meothods
   return {
     init: function () {
-      console.log("initializing app...");
+      // clear edit state / set initial state
+      UICtrl.clearEditState();
 
-      // fet items from data structure
+      // fetch items from data structure
       const items = ItemCtrl.getItems();
 
       // populate list with items
