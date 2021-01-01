@@ -74,7 +74,7 @@ const ItemCtrl = (function () {
       }
 
       // format date
-      date = moment().format('MMM Do YY');
+      date = moment().format('MMM Do');
 
       // format time
       showtime = moment().format('hh:mm');
@@ -187,9 +187,10 @@ const UICtrl = (function () {
       div.innerHTML = `
         <div class="row">
         <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
-        <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a></span>
-        <strong>${item.city}</strong>
+        <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a>
+        <p>${item.city}</p>
         <p>${item.venue}</p>
+        </span>
         </div>
       </div>
       <div class="card-reveal">
