@@ -225,6 +225,9 @@ const UICtrl = (function () {
         document.querySelector(UISelectors.itemShowtime).value = '';
         document.querySelector(UISelectors.itemArrival).value = '';
     },
+    clearEditState: function () {
+      UICtrl.clearInput();
+    },
     getSelectors: function () {
       return UISelectors;
     },
