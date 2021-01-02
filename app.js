@@ -291,7 +291,7 @@ const App = (function (ItemCtrl, UICtrl) {
       .addEventListener("click", itemAddSubmit);
 
        // edit icon click event
-       document.querySelector(UISelectors.itemList).addEventListener("click", itemUpdateSubmit);
+       document.querySelector(UISelectors.itemList).addEventListener("click", itemEditClick);
   };
 
  
@@ -340,8 +340,8 @@ const App = (function (ItemCtrl, UICtrl) {
     e.preventDefault();
   };
 
-  // update item submit
-  const itemUpdateSubmit = function(e) {
+  // click edit item
+  const itemEditClick = function(e) {
     if(e.target.classList.contains('edit-item')) {
       // get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.parentNode.parentNode.id;
