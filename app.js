@@ -32,17 +32,17 @@ const ItemCtrl = (function () {
   // data structure / state
   const data = {
     items: [
-    // //   {
-    // //     id: 0,
-    // //     date: "March 3",
-    // //     city: "Atlanta, GA",
-    // //     venue: "Tabernacle",
-    // //     contactname: "Scott Orvold",
-    // //     deal: 10000,
-    // //     deposit: 5000,
-    // //     showtime: 01600,
-    // //     arrival: 01200,
-    // //   },
+      // //   {
+      // //     id: 0,
+      // //     date: "March 3",
+      // //     city: "Atlanta, GA",
+      // //     venue: "Tabernacle",
+      // //     contactname: "Scott Orvold",
+      // //     deal: 10000,
+      // //     deposit: 5000,
+      // //     showtime: 01600,
+      // //     arrival: 01200,
+      // //   },
     ],
     currentItem: null,
   };
@@ -74,11 +74,11 @@ const ItemCtrl = (function () {
       }
 
       // format date
-      date = moment().format('MMM Do');
+      date = moment().format("MMM Do");
 
       // format time
-      showtime = moment().format('hh:mm');
-      arrival = moment().format('hh:mm');
+      showtime = moment().format("hh:mm");
+      arrival = moment().format("hh:mm");
 
       // number inputs to number
       deal = parseInt(deal);
@@ -105,17 +105,17 @@ const ItemCtrl = (function () {
 
       return newItem;
     },
-    getItemById: function(id) {
+    getItemById: function (id) {
       let found = null;
       // loop through items
-      data.items.forEach(function(item) {
-        if(item.id === id){
+      data.items.forEach(function (item) {
+        if (item.id === id) {
           found = item;
         }
       });
       return found;
     },
-    updateItem: function(    
+    updateItem: function (
       date,
       city,
       venue,
@@ -126,35 +126,33 @@ const ItemCtrl = (function () {
       deal,
       deposit,
       showtime,
-      arrival) {
+      arrival
+    ) {
+      let found = null;
 
-        let found = null;
-
-        data.items.forEach(function(item){
-          if(item.id === data.currentItem.id) {
-            item.date = date;
-            item.city = city;
-            item.venue = venue;
-            item.address = address;
-            item.contactname = contactname;
-            item.phonenumber = phonenumber;
-            item.email  = email;
-            item.deal = deal;
-            item.deposit = deposit;
-            item.showtime = showtime;
-            item.arrival = arrival;
-            found = item;
-          }
-        })
-            return found;
-
+      data.items.forEach(function (item) {
+        if (item.id === data.currentItem.id) {
+          item.date = date;
+          item.city = city;
+          item.venue = venue;
+          item.address = address;
+          item.contactname = contactname;
+          item.phonenumber = phonenumber;
+          item.email = email;
+          item.deal = deal;
+          item.deposit = deposit;
+          item.showtime = showtime;
+          item.arrival = arrival;
+          found = item;
+        }
+      });
+      return found;
     },
-    setCurrentItem: function(item) {
+    setCurrentItem: function (item) {
       data.currentItem = item;
     },
-    getCurrentItem: function() {
+    getCurrentItem: function () {
       return data.currentItem;
-      
     },
     logData: function () {
       return data;
@@ -166,6 +164,7 @@ const ItemCtrl = (function () {
 const UICtrl = (function () {
   const UISelectors = {
     itemList: "#item-list",
+    listItems: ".listitem",
     addBtn: ".add-btn",
     updateBtn: ".update-btn",
     deleteBtn: ".delete-btn",
@@ -248,17 +247,17 @@ const UICtrl = (function () {
         </div>
       </div>
       <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
-        <strong>City: ${item.city}</strong>
-        <p>Venue: ${item.venue}</p>
-        <p>Address: ${item.address}</p>
-        <p>Contact: ${item.contactname}</p>
-        <p>Phone Number: ${item.phonenumber}</p>
-        <p>email: ${item.email}</p>
-        <p>Deal: $${item.deal}</p>
-        <p>Deposit: $${item.deposit}</p>
-        <p>Set Time: ${item.showtime} PM</p>
-        <p>Arrival Time: ${item.arrival} PM</p>
+        <span class="card-title grey-text text-darken-4 listitem">Date: ${item.date}<i class="material-icons right">close</i></span>
+        <strong class="listitem">City: ${item.city}</strong>
+        <p class= "listitem">Venue: ${item.venue}</p>
+        <p class= "listitem">Address: ${item.address}</p>
+        <p class="listitem">Contact: ${item.contactname}</p>
+        <p class="listitem">Phone Number: ${item.phonenumber}</p>
+        <p class="listitem">email: ${item.email}</p>
+        <p class="listitem">Deal: $${item.deal}</p>
+        <p class="listitem">Deposit: $${item.deposit}</p>
+        <p class="listitem">Set Time: ${item.showtime} PM</p>
+        <p class="listitem">Arrival Time: ${item.arrival} PM</p>
       </div>
       `;
       // insert item
@@ -266,45 +265,104 @@ const UICtrl = (function () {
         .querySelector(UISelectors.itemList)
         .insertAdjacentElement("beforeend", div);
     },
-    clearInput: function () {
-      document.querySelector(UISelectors.itemDate).value = '';
-        document.querySelector(UISelectors.itemCity).value = '';
-        document.querySelector(UISelectors.itemVenue).value = '';
-        document.querySelector(UISelectors.itemAddress).value = '';
-        document.querySelector(UISelectors.itemContact).value = '';
-        document.querySelector(UISelectors.itemPhone).value = '';
-        document.querySelector(UISelectors.itemEmail).value = '';
-        document.querySelector(UISelectors.itemDeal).value = '';
-        document.querySelector(UISelectors.itemDeposit).value = '';
-        document.querySelector(UISelectors.itemShowtime).value = '';
-        document.querySelector(UISelectors.itemArrival).value = '';
+    updateListItem: function (item) {
+      let listItems = document.querySelectorAll(UISelectors.listItems);
+
+      // turn node list into array
+
+      listItems = Array.from(listItems);
+
+      listItems.forEach(function (listItem) {
+        const itemID = listItem.getAttribute("id");
+
+        if (itemID === `item-${item.id}`) {
+          document.querySelector(`#${itemID}`).innerHTML = `
+        <div class="row">
+        <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
+        <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a>
+        <p>${item.city}</p>
+        <p>${item.venue}</p>
+        </span>
+        </div>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4 listitem">Date: ${item.date}<i class="material-icons right">close</i></span>
+        <strong class="listitem">City: ${item.city}</strong>
+        <p class= "listitem">Venue: ${item.venue}</p>
+        <p class= "listitem">Address: ${item.address}</p>
+        <p class="listitem">Contact: ${item.contactname}</p>
+        <p class="listitem">Phone Number: ${item.phonenumber}</p>
+        <p class="listitem">email: ${item.email}</p>
+        <p class="listitem">Deal: $${item.deal}</p>
+        <p class="listitem">Deposit: $${item.deposit}</p>
+        <p class="listitem">Set Time: ${item.showtime} PM</p>
+        <p class="listitem">Arrival Time: ${item.arrival} PM</p>
+      </div>
+      `;
+        }
+      });
     },
-    addItemToForm: function() {
-      document.querySelector(UISelectors.itemDate).value = ItemCtrl.getCurrentItem().date;
-      document.querySelector(UISelectors.itemCity).value = ItemCtrl.getCurrentItem().city;
-      document.querySelector(UISelectors.itemVenue).value = ItemCtrl.getCurrentItem().venue;
-      document.querySelector(UISelectors.itemAddress).value = ItemCtrl.getCurrentItem().address;
-      document.querySelector(UISelectors.itemContact).value = ItemCtrl.getCurrentItem().contactname;
-      document.querySelector(UISelectors.itemPhone).value = ItemCtrl.getCurrentItem().phonenumber;
-      document.querySelector(UISelectors.itemEmail).value = ItemCtrl.getCurrentItem().email;
-      document.querySelector(UISelectors.itemDeal).value = ItemCtrl.getCurrentItem().deal;
-      document.querySelector(UISelectors.itemDeposit).value = ItemCtrl.getCurrentItem().deposit;
-      document.querySelector(UISelectors.itemShowtime).value = ItemCtrl.getCurrentItem().showtime;
-      document.querySelector(UISelectors.itemArrival).value = ItemCtrl.getCurrentItem().arrival;
+    clearInput: function () {
+      document.querySelector(UISelectors.itemDate).value = "";
+      document.querySelector(UISelectors.itemCity).value = "";
+      document.querySelector(UISelectors.itemVenue).value = "";
+      document.querySelector(UISelectors.itemAddress).value = "";
+      document.querySelector(UISelectors.itemContact).value = "";
+      document.querySelector(UISelectors.itemPhone).value = "";
+      document.querySelector(UISelectors.itemEmail).value = "";
+      document.querySelector(UISelectors.itemDeal).value = "";
+      document.querySelector(UISelectors.itemDeposit).value = "";
+      document.querySelector(UISelectors.itemShowtime).value = "";
+      document.querySelector(UISelectors.itemArrival).value = "";
+    },
+    addItemToForm: function () {
+      document.querySelector(
+        UISelectors.itemDate
+      ).value = ItemCtrl.getCurrentItem().date;
+      document.querySelector(
+        UISelectors.itemCity
+      ).value = ItemCtrl.getCurrentItem().city;
+      document.querySelector(
+        UISelectors.itemVenue
+      ).value = ItemCtrl.getCurrentItem().venue;
+      document.querySelector(
+        UISelectors.itemAddress
+      ).value = ItemCtrl.getCurrentItem().address;
+      document.querySelector(
+        UISelectors.itemContact
+      ).value = ItemCtrl.getCurrentItem().contactname;
+      document.querySelector(
+        UISelectors.itemPhone
+      ).value = ItemCtrl.getCurrentItem().phonenumber;
+      document.querySelector(
+        UISelectors.itemEmail
+      ).value = ItemCtrl.getCurrentItem().email;
+      document.querySelector(
+        UISelectors.itemDeal
+      ).value = ItemCtrl.getCurrentItem().deal;
+      document.querySelector(
+        UISelectors.itemDeposit
+      ).value = ItemCtrl.getCurrentItem().deposit;
+      document.querySelector(
+        UISelectors.itemShowtime
+      ).value = ItemCtrl.getCurrentItem().showtime;
+      document.querySelector(
+        UISelectors.itemArrival
+      ).value = ItemCtrl.getCurrentItem().arrival;
       UICtrl.showEditState();
     },
     clearEditState: function () {
       UICtrl.clearInput();
-      document.querySelector(UISelectors.updateBtn).style.display = 'none';
-      document.querySelector(UISelectors.deleteBtn).style.display = 'none';
-      document.querySelector(UISelectors.backBtn).style.display = 'none';
-      document.querySelector(UISelectors.addBtn).style.display = 'inline';
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+      document.querySelector(UISelectors.addBtn).style.display = "inline";
     },
     showEditState: function () {
-      document.querySelector(UISelectors.updateBtn).style.display = 'inline';
-      document.querySelector(UISelectors.deleteBtn).style.display = 'inline';
-      document.querySelector(UISelectors.backBtn).style.display = 'inline';
-      document.querySelector(UISelectors.addBtn).style.display = 'none';
+      document.querySelector(UISelectors.updateBtn).style.display = "inline";
+      document.querySelector(UISelectors.deleteBtn).style.display = "inline";
+      document.querySelector(UISelectors.backBtn).style.display = "inline";
+      document.querySelector(UISelectors.addBtn).style.display = "none";
     },
     getSelectors: function () {
       return UISelectors;
@@ -324,22 +382,24 @@ const App = (function (ItemCtrl, UICtrl) {
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
 
-      // disable submit on enter
-      document.addEventListener('keypress', function(e){
-        if(e.keyCode ===13 || e.which === 13) {
-          e.preventDefault();
-          return false;
-        }
-      })
+    // disable submit on enter
+    document.addEventListener("keypress", function (e) {
+      if (e.keyCode === 13 || e.which === 13) {
+        e.preventDefault();
+        return false;
+      }
+    });
 
-       // edit icon click event
-       document.querySelector(UISelectors.itemList).addEventListener("click", itemEditClick);
+    // edit icon click event
+    document
+      .querySelector(UISelectors.itemList)
+      .addEventListener("click", itemEditClick);
 
-       // update item event
-       document.querySelector(UISelectors.updateBtn).addEventListener("click", itemUpdateSubmit);
+    // update item event
+    document
+      .querySelector(UISelectors.updateBtn)
+      .addEventListener("click", itemUpdateSubmit);
   };
-
- 
 
   // add item submit
   const itemAddSubmit = function (e) {
@@ -386,13 +446,13 @@ const App = (function (ItemCtrl, UICtrl) {
   };
 
   // click edit item
-  const itemEditClick = function(e) {
-    if(e.target.classList.contains('edit-item')) {
+  const itemEditClick = function (e) {
+    if (e.target.classList.contains("edit-item")) {
       // get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.parentNode.parentNode.id;
 
       // break into an array
-      const listIdArr = listId.split('-');
+      const listIdArr = listId.split("-");
 
       // get the actual id
       const id = parseInt(listIdArr[1]);
@@ -405,19 +465,18 @@ const App = (function (ItemCtrl, UICtrl) {
 
       // add item to form
       UICtrl.addItemToForm();
-
     }
 
     e.preventDefault();
-  }
+  };
 
   // update item submit
-  const itemUpdateSubmit = function(e) {
+  const itemUpdateSubmit = function (e) {
     // get item input
     const input = UICtrl.getItemInput();
 
     // update item
-    const updatedItem = ItemCtrl.updateItem(        
+    const updatedItem = ItemCtrl.updateItem(
       input.date,
       input.city,
       input.venue,
@@ -428,10 +487,14 @@ const App = (function (ItemCtrl, UICtrl) {
       input.deal,
       input.deposit,
       input.showtime,
-      input.arrival);
+      input.arrival
+    );
+
+    // update ui
+    UICtrl.updateListItem(updatedItem);
 
     e.preventDefault();
-  }
+  };
   // public meothods
   return {
     init: function () {
