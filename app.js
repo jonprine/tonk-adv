@@ -32,17 +32,17 @@ const ItemCtrl = (function () {
   // data structure / state
   const data = {
     items: [
-    //   {
-    //     id: 0,
-    //     date: "March 3",
-    //     city: "Atlanta, GA",
-    //     venue: "Tabernacle",
-    //     contactname: "Scott Orvold",
-    //     deal: 10000,
-    //     deposit: 5000,
-    //     showtime: 01600,
-    //     arrival: 01200,
-    //   },
+    // //   {
+    // //     id: 0,
+    // //     date: "March 3",
+    // //     city: "Atlanta, GA",
+    // //     venue: "Tabernacle",
+    // //     contactname: "Scott Orvold",
+    // //     deal: 10000,
+    // //     deposit: 5000,
+    // //     showtime: 01600,
+    // //     arrival: 01200,
+    // //   },
     ],
     currentItem: null,
   };
@@ -120,6 +120,7 @@ const ItemCtrl = (function () {
     },
     getCurrentItem: function() {
       return data.currentItem;
+      
     },
     logData: function () {
       return data;
@@ -343,7 +344,8 @@ const App = (function (ItemCtrl, UICtrl) {
   const itemUpdateSubmit = function(e) {
     if(e.target.classList.contains('edit-item')) {
       // get list item id (item-0, item-1)
-      const listId = e.target.parentNode.parentNode.id;
+      const listId = e.target.parentNode.parentNode.parentNode.parentNode.id;
+      console.log(listId);
 
       // break into an array
       const listIdArr = listId.split('-');
