@@ -115,6 +115,40 @@ const ItemCtrl = (function () {
       });
       return found;
     },
+    updateItem: function(    
+      date,
+      city,
+      venue,
+      address,
+      contactname,
+      phonenumber,
+      email,
+      deal,
+      deposit,
+      showtime,
+      arrival) {
+
+        let found = null;
+
+        data.items.forEach(function(item){
+          if(item.id === data.currentItem.id) {
+            item.date = date;
+            item.city = city;
+            item.venue = venue;
+            item.address = address;
+            item.contactname = contactname;
+            item.phonenumber = phonenumber;
+            item.email  = email;
+            item.deal = deal;
+            item.deposit = deposit;
+            item.showtime = showtime;
+            item.arrival = arrival;
+            found = item;
+          }
+        })
+            return found;
+
+    },
     setCurrentItem: function(item) {
       data.currentItem = item;
     },
@@ -290,8 +324,19 @@ const App = (function (ItemCtrl, UICtrl) {
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
 
+      // disable submit on enter
+      document.addEventListener('keypress', function(e){
+        if(e.keyCode ===13 || e.which === 13) {
+          e.preventDefault();
+          return false;
+        }
+      })
+
        // edit icon click event
        document.querySelector(UISelectors.itemList).addEventListener("click", itemEditClick);
+
+       // update item event
+       document.querySelector(UISelectors.updateBtn).addEventListener("click", itemUpdateSubmit);
   };
 
  
@@ -345,7 +390,6 @@ const App = (function (ItemCtrl, UICtrl) {
     if(e.target.classList.contains('edit-item')) {
       // get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.parentNode.parentNode.id;
-      console.log(listId);
 
       // break into an array
       const listIdArr = listId.split('-');
@@ -363,6 +407,28 @@ const App = (function (ItemCtrl, UICtrl) {
       UICtrl.addItemToForm();
 
     }
+
+    e.preventDefault();
+  }
+
+  // update item submit
+  const itemUpdateSubmit = function(e) {
+    // get item input
+    const input = UICtrl.getItemInput();
+
+    // update item
+    const updatedItem = ItemCtrl.updateItem(        
+      input.date,
+      input.city,
+      input.venue,
+      input.address,
+      input.contactname,
+      input.phonenumber,
+      input.email,
+      input.deal,
+      input.deposit,
+      input.showtime,
+      input.arrival);
 
     e.preventDefault();
   }
