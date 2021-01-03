@@ -77,8 +77,8 @@ const ItemCtrl = (function () {
       date = moment(date).format("MMM Do");
 
       // format time
-      showtime = moment(showtime).format("hh:mm");
-      arrival = moment(arrival).format("hh:mm");
+      showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
+      arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
 
       // number inputs to number
       deal = parseInt(deal);
@@ -204,8 +204,8 @@ const UICtrl = (function () {
                 <p>Contact: ${item.contactname}</p>
                 <p>Deal: $${item.deal}</p>
                 <p>Deposit: ${item.deposit}</p>
-                <p>Set Time: ${item.showtime} PM</p>
-                <p>Arrival Time: ${item.arrival} PM</p>
+                <p>Set Time: ${item.showtime}</p>
+                <p>Arrival Time: ${item.arrival}</p>
               </div>
                 </div>
                 `;
@@ -256,8 +256,8 @@ const UICtrl = (function () {
         <p>email: ${item.email}</p>
         <p>Deal: $${item.deal}</p>
         <p>Deposit: $${item.deposit}</p>
-        <p>Set Time: ${item.showtime} PM</p>
-        <p>Arrival Time: ${item.arrival} PM</p>
+        <p>Set Time: ${item.showtime}</p>
+        <p>Arrival Time: ${item.arrival}</p>
       </div>
       `;
       // insert item
@@ -298,8 +298,8 @@ const UICtrl = (function () {
         <p>email: ${item.email}</p>
         <p>Deal: $${item.deal}</p>
         <p>Deposit: $${item.deposit}</p>
-        <p>Set Time: ${item.showtime} PM</p>
-        <p>Arrival Time: ${item.arrival} PM</p>
+        <p>Set Time: ${item.showtime}</p>
+        <p>Arrival Time: ${item.arrival}</p>
       </div>
       `;
         }
