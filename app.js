@@ -74,11 +74,11 @@ const ItemCtrl = (function () {
       }
 
       // format date
-      date = moment(date).format("MMM Do");
+      // date = moment(date).format("MMM Do");
 
       // format time
-      showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
-      arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
+      // showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
+      // arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
 
       // number inputs to number
       deal = parseInt(deal);
@@ -131,11 +131,11 @@ const ItemCtrl = (function () {
       let found = null;
 
       // format date
-      date = moment(date).format("MMM Do");
+      // date = moment(date).format("MMM Do");
 
       // format time
-      showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
-      arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
+      // showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
+      // arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
 
       data.items.forEach(function (item) {
         if (item.id === data.currentItem.id) {
@@ -310,7 +310,7 @@ const UICtrl = (function () {
       });
     },
     clearInput: function () {
-      // document.querySelector(UISelectors.itemDate).value = "";
+      document.querySelector(UISelectors.itemDate).value = "";
       document.querySelector(UISelectors.itemCity).value = "";
       document.querySelector(UISelectors.itemVenue).value = "";
       document.querySelector(UISelectors.itemAddress).value = "";
@@ -319,13 +319,13 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.itemEmail).value = "";
       document.querySelector(UISelectors.itemDeal).value = "";
       document.querySelector(UISelectors.itemDeposit).value = "";
-      // document.querySelector(UISelectors.itemShowtime).value = "";
-      // document.querySelector(UISelectors.itemArrival).value = "";
+      document.querySelector(UISelectors.itemShowtime).value = "";
+      document.querySelector(UISelectors.itemArrival).value = "";
     },
     addItemToForm: function () {
-      // document.querySelector(
-      //   UISelectors.itemDate
-      // ).value = ItemCtrl.getCurrentItem().date;
+      document.querySelector(
+        UISelectors.itemDate
+      ).value = ItemCtrl.getCurrentItem().date;
       document.querySelector(
         UISelectors.itemCity
       ).value = ItemCtrl.getCurrentItem().city;
@@ -350,12 +350,12 @@ const UICtrl = (function () {
       document.querySelector(
         UISelectors.itemDeposit
       ).value = ItemCtrl.getCurrentItem().deposit;
-      // document.querySelector(
-      //   UISelectors.itemShowtime
-      // ).value = ItemCtrl.getCurrentItem().showtime;
-      // document.querySelector(
-      //   UISelectors.itemArrival
-      // ).value = ItemCtrl.getCurrentItem().arrival;
+      document.querySelector(
+        UISelectors.itemShowtime
+      ).value = ItemCtrl.getCurrentItem().showtime;
+      document.querySelector(
+        UISelectors.itemArrival
+      ).value = ItemCtrl.getCurrentItem().arrival;
       UICtrl.showEditState();
     },
     clearEditState: function () {
