@@ -164,7 +164,7 @@ const ItemCtrl = (function () {
 const UICtrl = (function () {
   const UISelectors = {
     itemList: "#item-list",
-    listItems: ".listitem",
+    listItems: "#item-list .card.card-content",
     addBtn: ".add-btn",
     updateBtn: ".update-btn",
     deleteBtn: ".delete-btn",
@@ -199,7 +199,7 @@ const UICtrl = (function () {
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
-                <strong>City: ${item.city}</strong>
+                <p>City: ${item.city}</p>
                 <p>Venue: ${item.venue}</p>
                 <p>Contact: ${item.contactname}</p>
                 <p>Deal: $${item.deal}</p>
@@ -247,17 +247,17 @@ const UICtrl = (function () {
         </div>
       </div>
       <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4 listitem">Date: ${item.date}<i class="material-icons right">close</i></span>
-        <strong class="listitem">City: ${item.city}</strong>
-        <p class= "listitem">Venue: ${item.venue}</p>
-        <p class= "listitem">Address: ${item.address}</p>
-        <p class="listitem">Contact: ${item.contactname}</p>
-        <p class="listitem">Phone Number: ${item.phonenumber}</p>
-        <p class="listitem">email: ${item.email}</p>
-        <p class="listitem">Deal: $${item.deal}</p>
-        <p class="listitem">Deposit: $${item.deposit}</p>
-        <p class="listitem">Set Time: ${item.showtime} PM</p>
-        <p class="listitem">Arrival Time: ${item.arrival} PM</p>
+        <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
+        <strong>City: ${item.city}</strong>
+        <p>Venue: ${item.venue}</p>
+        <p>Address: ${item.address}</p>
+        <p>Contact: ${item.contactname}</p>
+        <p>Phone Number: ${item.phonenumber}</p>
+        <p>email: ${item.email}</p>
+        <p>Deal: $${item.deal}</p>
+        <p>Deposit: $${item.deposit}</p>
+        <p>Set Time: ${item.showtime} PM</p>
+        <p>Arrival Time: ${item.arrival} PM</p>
       </div>
       `;
       // insert item
@@ -267,13 +267,16 @@ const UICtrl = (function () {
     },
     updateListItem: function (item) {
       let listItems = document.querySelectorAll(UISelectors.listItems);
-
+   
+      console.log(listItems);
       // turn node list into array
 
       listItems = Array.from(listItems);
+      console.log(listItems);
 
       listItems.forEach(function (listItem) {
         const itemID = listItem.getAttribute("id");
+        console.log(itemID);
 
         if (itemID === `item-${item.id}`) {
           document.querySelector(`#${itemID}`).innerHTML = `
@@ -288,15 +291,15 @@ const UICtrl = (function () {
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4 listitem">Date: ${item.date}<i class="material-icons right">close</i></span>
         <strong class="listitem">City: ${item.city}</strong>
-        <p class= "listitem">Venue: ${item.venue}</p>
-        <p class= "listitem">Address: ${item.address}</p>
-        <p class="listitem">Contact: ${item.contactname}</p>
-        <p class="listitem">Phone Number: ${item.phonenumber}</p>
-        <p class="listitem">email: ${item.email}</p>
-        <p class="listitem">Deal: $${item.deal}</p>
-        <p class="listitem">Deposit: $${item.deposit}</p>
-        <p class="listitem">Set Time: ${item.showtime} PM</p>
-        <p class="listitem">Arrival Time: ${item.arrival} PM</p>
+        <p>Venue: ${item.venue}</p>
+        <p>Address: ${item.address}</p>
+        <p>Contact: ${item.contactname}</p>
+        <p>Phone Number: ${item.phonenumber}</p>
+        <p>email: ${item.email}</p>
+        <p>Deal: $${item.deal}</p>
+        <p>Deposit: $${item.deposit}</p>
+        <p>Set Time: ${item.showtime} PM</p>
+        <p>Arrival Time: ${item.arrival} PM</p>
       </div>
       `;
         }
@@ -495,7 +498,7 @@ const App = (function (ItemCtrl, UICtrl) {
 
     e.preventDefault();
   };
-  // public meothods
+  // public methods
   return {
     init: function () {
       // clear edit state / set initial state
