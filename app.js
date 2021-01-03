@@ -74,11 +74,11 @@ const ItemCtrl = (function () {
       }
 
       // format date
-      date = moment().format("MMM Do");
+      date = moment(date).format("MMM Do");
 
       // format time
-      showtime = moment().format("hh:mm");
-      arrival = moment().format("hh:mm");
+      showtime = moment(showtime).format("hh:mm");
+      arrival = moment(arrival).format("hh:mm");
 
       // number inputs to number
       deal = parseInt(deal);
