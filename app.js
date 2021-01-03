@@ -500,6 +500,9 @@ const App = (function (ItemCtrl, UICtrl) {
     // update ui
     UICtrl.updateListItem(updatedItem);
 
+    // clear edit state
+    UICtrl.clearEditState();
+
     e.preventDefault();
   };
   // public methods
