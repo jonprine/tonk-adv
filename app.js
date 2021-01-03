@@ -133,6 +133,10 @@ const ItemCtrl = (function () {
       // format date
       date = moment(date).format("MMM Do");
 
+      // format time
+      showtime = moment(showtime, "HH:mm:ss").format("hh:mm A");
+      arrival = moment(arrival, "HH:mm:ss").format("hh:mm A");
+
       data.items.forEach(function (item) {
         if (item.id === data.currentItem.id) {
           item.date = date;
@@ -270,16 +274,13 @@ const UICtrl = (function () {
     },
     updateListItem: function (item) {
       let listItems = document.querySelectorAll(UISelectors.listItems);
-   
-      console.log(listItems);
+
       // turn node list into array
 
       listItems = Array.from(listItems);
-      console.log(listItems);
 
       listItems.forEach(function (listItem) {
         const itemID = listItem.getAttribute("id");
-        console.log(itemID);
 
         if (itemID === `item-${item.id}`) {
           document.querySelector(`#${itemID}`).innerHTML = `
@@ -318,8 +319,8 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.itemEmail).value = "";
       document.querySelector(UISelectors.itemDeal).value = "";
       document.querySelector(UISelectors.itemDeposit).value = "";
-      document.querySelector(UISelectors.itemShowtime).value = "";
-      document.querySelector(UISelectors.itemArrival).value = "";
+      // document.querySelector(UISelectors.itemShowtime).value = "";
+      // document.querySelector(UISelectors.itemArrival).value = "";
     },
     addItemToForm: function () {
       // document.querySelector(
@@ -349,12 +350,12 @@ const UICtrl = (function () {
       document.querySelector(
         UISelectors.itemDeposit
       ).value = ItemCtrl.getCurrentItem().deposit;
-      document.querySelector(
-        UISelectors.itemShowtime
-      ).value = ItemCtrl.getCurrentItem().showtime;
-      document.querySelector(
-        UISelectors.itemArrival
-      ).value = ItemCtrl.getCurrentItem().arrival;
+      // document.querySelector(
+      //   UISelectors.itemShowtime
+      // ).value = ItemCtrl.getCurrentItem().showtime;
+      // document.querySelector(
+      //   UISelectors.itemArrival
+      // ).value = ItemCtrl.getCurrentItem().arrival;
       UICtrl.showEditState();
     },
     clearEditState: function () {
@@ -495,7 +496,6 @@ const App = (function (ItemCtrl, UICtrl) {
       input.showtime,
       input.arrival
     );
-
 
     // update ui
     UICtrl.updateListItem(updatedItem);
