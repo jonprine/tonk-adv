@@ -306,7 +306,7 @@ const UICtrl = (function () {
       });
     },
     clearInput: function () {
-      document.querySelector(UISelectors.itemDate).value = "";
+      // document.querySelector(UISelectors.itemDate).value = "";
       document.querySelector(UISelectors.itemCity).value = "";
       document.querySelector(UISelectors.itemVenue).value = "";
       document.querySelector(UISelectors.itemAddress).value = "";
@@ -319,9 +319,9 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.itemArrival).value = "";
     },
     addItemToForm: function () {
-      document.querySelector(
-        UISelectors.itemDate
-      ).value = ItemCtrl.getCurrentItem().date;
+      // document.querySelector(
+      //   UISelectors.itemDate
+      // ).value = ItemCtrl.getCurrentItem().date;
       document.querySelector(
         UISelectors.itemCity
       ).value = ItemCtrl.getCurrentItem().city;
@@ -492,6 +492,7 @@ const App = (function (ItemCtrl, UICtrl) {
       input.showtime,
       input.arrival
     );
+
 
     // update ui
     UICtrl.updateListItem(updatedItem);
