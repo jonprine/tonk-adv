@@ -155,6 +155,18 @@ const ItemCtrl = (function () {
       });
       return found;
     },
+    deleteItem: function(id) {
+      // get ids
+      const ids = data.items.map(function(item) {
+        return item.id;
+      });
+
+      // get index
+      const index = ids.indexOf(id);
+
+      // remove item
+      data.items.splice(index, 1);
+    },
     setCurrentItem: function (item) {
       data.currentItem = item;
     },
@@ -309,6 +321,11 @@ const UICtrl = (function () {
         }
       });
     },
+    deleteListItem: function(id) {
+      const itemID = `#item-${id}`;
+      const item = document.querySelector(itemID);
+      item.remove();
+    },
     clearInput: function () {
       document.querySelector(UISelectors.itemDate).value = "";
       document.querySelector(UISelectors.itemCity).value = "";
@@ -406,6 +423,16 @@ const App = (function (ItemCtrl, UICtrl) {
     document
       .querySelector(UISelectors.updateBtn)
       .addEventListener("click", itemUpdateSubmit);
+
+    // back button event
+    document
+      .querySelector(UISelectors.deleteBtn)
+      .addEventListener("click", itemDeleteSubmit);
+
+    // back button event
+    document
+      .querySelector(UISelectors.backBtn)
+      .addEventListener("click", UICtrl.clearEditState);
   };
 
   // add item submit
@@ -505,6 +532,23 @@ const App = (function (ItemCtrl, UICtrl) {
 
     e.preventDefault();
   };
+
+  // delete button event
+  const itemDeleteSubmit = function(e) {
+    // get current item
+    const currentItem = ItemCtrl.getCurrentItem();
+
+    // delete from data structure
+    ItemCtrl.deleteItem(currentItem.id);
+
+    // delete from ui
+    UICtrl.deleteListItem(currentItem.id);
+
+    // clear state
+    UICtrl.clearEditState();
+    
+    e.preventDefault();
+  }
   // public methods
   return {
     init: function () {
