@@ -130,6 +130,9 @@ const ItemCtrl = (function () {
     ) {
       let found = null;
 
+      // format date
+      date = moment(date).format("MMM Do");
+
       data.items.forEach(function (item) {
         if (item.id === data.currentItem.id) {
           item.date = date;
