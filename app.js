@@ -3,7 +3,7 @@ const StorageCtrl = (function () {
   // public methods
   return {
     storeItem: function (item) {
-      let items = [];
+      let items;
       // check if any items in ls
       if (localStorage.getItem("items") === null) {
         items = [];
@@ -21,6 +21,15 @@ const StorageCtrl = (function () {
         localStorage.setItem("items", JSON.stringify(items));
       }
     },
+    getItemsFromStorage: function(){
+      let items = [];
+      if(localStorage.getItem('items') === null){
+        items = [];
+      } else  {
+        items =   JSON.parse(localStorage.getItem('items'));
+      }
+      return items;
+    }
   };
 })();
 
@@ -57,7 +66,7 @@ const ItemCtrl = (function () {
 
   // data structure / state
   const data = {
-    items: [
+    // items: [
       // //   {
       // //     id: 0,
       // //     date: "March 3",
@@ -69,7 +78,8 @@ const ItemCtrl = (function () {
       // //     showtime: 01600,
       // //     arrival: 01200,
       // //   },
-    ],
+    // ],
+    items: StorageCtrl.getItemsFromStorage(),
     currentItem: null,
   };
 
