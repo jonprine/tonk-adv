@@ -1,3 +1,29 @@
+// storage controller
+const StorageCtrl = (function () {
+  // public methods
+  return {
+    storeItem: function (item) {
+      let items = [];
+      // check if any items in ls
+      if (localStorage.getItem("items") === null) {
+        items = [];
+        // push new item
+        items.push(item);
+        // set ls
+        localStorage.setItem("items", JSON.stringify(items));
+      } else {
+        items = JSON.parse(localStorage.getItem("items"));
+
+        // push new item
+        items.push(item);
+
+        // re set ls
+        localStorage.setItem("items", JSON.stringify(items));
+      }
+    },
+  };
+})();
+
 //  item controller
 const ItemCtrl = (function () {
   // item constructor
@@ -155,9 +181,9 @@ const ItemCtrl = (function () {
       });
       return found;
     },
-    deleteItem: function(id) {
+    deleteItem: function (id) {
       // get ids
-      const ids = data.items.map(function(item) {
+      const ids = data.items.map(function (item) {
         return item.id;
       });
 
@@ -321,7 +347,7 @@ const UICtrl = (function () {
         }
       });
     },
-    deleteListItem: function(id) {
+    deleteListItem: function (id) {
       const itemID = `#item-${id}`;
       const item = document.querySelector(itemID);
       item.remove();
@@ -395,7 +421,7 @@ const UICtrl = (function () {
 })();
 
 // app controller
-const App = (function (ItemCtrl, UICtrl) {
+const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
   // load event listeners
   const loadEventListeners = function () {
     // get UI selectors
@@ -472,6 +498,9 @@ const App = (function (ItemCtrl, UICtrl) {
       // add item to UI list
       UICtrl.addListItem(newItem);
 
+      // Store in localstorage
+      StorageCtrl.storeItem(newItem);
+
       // clear fields
       UICtrl.clearInput();
     }
@@ -534,7 +563,7 @@ const App = (function (ItemCtrl, UICtrl) {
   };
 
   // delete button event
-  const itemDeleteSubmit = function(e) {
+  const itemDeleteSubmit = function (e) {
     // get current item
     const currentItem = ItemCtrl.getCurrentItem();
 
@@ -546,9 +575,9 @@ const App = (function (ItemCtrl, UICtrl) {
 
     // clear state
     UICtrl.clearEditState();
-    
+
     e.preventDefault();
-  }
+  };
   // public methods
   return {
     init: function () {
@@ -565,7 +594,7 @@ const App = (function (ItemCtrl, UICtrl) {
       loadEventListeners();
     },
   };
-})(ItemCtrl, UICtrl);
+})(ItemCtrl, StorageCtrl, UICtrl);
 
 // initialize app
 App.init();
