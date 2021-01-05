@@ -42,7 +42,7 @@ const StorageCtrl = (function () {
       localStorage.setItem("items", JSON.stringify(items));
     },
     deleteItemFromStorage: function (id) {
-    let items = JSON.parse(localStorage.getItem("items"));
+      let items = JSON.parse(localStorage.getItem("items"));
 
       items.forEach(function (item, index) {
         if (id === item.id) {
@@ -50,7 +50,7 @@ const StorageCtrl = (function () {
         }
       });
       localStorage.setItem("items", JSON.stringify(items));
-    }
+    },
   };
 })();
 
@@ -265,25 +265,32 @@ const UICtrl = (function () {
 
       items.forEach(function (item) {
         html += `
-                <div class="card-content">
-                <div class="row">
-                <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
-                <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a></span>
-                <strong>${item.city}</strong>
-                <p>${item.venue}</p>
-                </div>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
-                <p>City: ${item.city}</p>
-                <p>Venue: ${item.venue}</p>
-                <p>Contact: ${item.contactname}</p>
-                <p>Deal: $${item.deal}</p>
-                <p>Deposit: ${item.deposit}</p>
-                <p>Set Time: ${item.showtime}</p>
-                <p>Arrival Time: ${item.arrival}</p>
-              </div>
-                </div>
+        
+        <div class="card card-content" id="item-${item.id}">
+        <div class="row">
+        <span class="card-title activator grey-text text-darken-4">${item.date}<i class="material-icons right">More Details</i>
+        <a href="#" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a>
+        <p>${item.city}</p>
+        <p>${item.venue}</p>
+        </span>
+        </div>
+      
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Date: ${item.date}<i class="material-icons right">close</i></span>
+        <strong>City: ${item.city}</strong>
+        <p>Venue: ${item.venue}</p>
+        <p>Address: ${item.address}</p>
+        <p>Contact: ${item.contactname}</p>
+        <p>Phone Number: ${item.phonenumber}</p>
+        <p>email: ${item.email}</p>
+        <p>Deal: $${item.deal}</p>
+        <p>Deposit: $${item.deposit}</p>
+        <p>Set Time: ${item.showtime}</p>
+        <p>Arrival Time: ${item.arrival}</p>
+      </div>
+      </div>
+      </div>
+   
                 `;
       });
 
