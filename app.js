@@ -1,6 +1,6 @@
-// storage controller
+// Storage Controller
 const StorageCtrl = (function () {
-  // public methods
+  // Public methods
   return {
     storeItem: function (item) {
       let items;
@@ -12,6 +12,7 @@ const StorageCtrl = (function () {
         // set ls
         localStorage.setItem("items", JSON.stringify(items));
       } else {
+        // get what is already in ls
         items = JSON.parse(localStorage.getItem("items"));
 
         // push new item
@@ -22,7 +23,7 @@ const StorageCtrl = (function () {
       }
     },
     getItemsFromStorage: function () {
-      let items = [];
+      let items;
       if (localStorage.getItem("items") === null) {
         items = [];
       } else {
@@ -31,7 +32,7 @@ const StorageCtrl = (function () {
       return items;
     },
     updateItemStorage: function (updatedItem) {
-      let items = JSON.parse(localstorage.getItem("items"));
+      let items = JSON.parse(localStorage.getItem("items"));
 
       items.forEach(function (item, index) {
         if (updatedItem.id === item.id) {
@@ -41,15 +42,15 @@ const StorageCtrl = (function () {
       localStorage.setItem("items", JSON.stringify(items));
     },
     deleteItemFromStorage: function (id) {
-      let items = JSON.parse(localstorage.getItem("items"));
+    let items = JSON.parse(localStorage.getItem("items"));
 
       items.forEach(function (item, index) {
-        if (updatedItem.id === item.id) {
+        if (id === item.id) {
           items.splice(index, 1);
         }
       });
       localStorage.setItem("items", JSON.stringify(items));
-    },
+    }
   };
 })();
 
