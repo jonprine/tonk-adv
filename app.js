@@ -29,6 +29,16 @@ const StorageCtrl = (function () {
         items =   JSON.parse(localStorage.getItem('items'));
       }
       return items;
+    },
+    updateItemStorage: function(updatedItem) {
+      let items = JSON.parse(localstorage.getItem('items'));
+
+      items.forEach(function (item, index){
+        if(updatedItem.id === item.id) {
+          items.splice(index, 1, updatedItem);
+        }
+      });
+      localStorage.setItem("items", JSON.stringify(items));
     }
   };
 })();
@@ -565,6 +575,9 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 
     // update ui
     UICtrl.updateListItem(updatedItem);
+
+    // update local storage
+    StorageCtrl.updateItemStorage(updatedItem);
 
     // clear edit state
     UICtrl.clearEditState();
