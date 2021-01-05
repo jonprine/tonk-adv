@@ -291,7 +291,7 @@ const UICtrl = (function () {
       </div>
       </div>
    
-                `;
+      `;
       });
 
       // insert list items
