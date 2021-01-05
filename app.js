@@ -21,25 +21,35 @@ const StorageCtrl = (function () {
         localStorage.setItem("items", JSON.stringify(items));
       }
     },
-    getItemsFromStorage: function(){
+    getItemsFromStorage: function () {
       let items = [];
-      if(localStorage.getItem('items') === null){
+      if (localStorage.getItem("items") === null) {
         items = [];
-      } else  {
-        items =   JSON.parse(localStorage.getItem('items'));
+      } else {
+        items = JSON.parse(localStorage.getItem("items"));
       }
       return items;
     },
-    updateItemStorage: function(updatedItem) {
-      let items = JSON.parse(localstorage.getItem('items'));
+    updateItemStorage: function (updatedItem) {
+      let items = JSON.parse(localstorage.getItem("items"));
 
-      items.forEach(function (item, index){
-        if(updatedItem.id === item.id) {
+      items.forEach(function (item, index) {
+        if (updatedItem.id === item.id) {
           items.splice(index, 1, updatedItem);
         }
       });
       localStorage.setItem("items", JSON.stringify(items));
-    }
+    },
+    deleteItemFromStorage: function (id) {
+      let items = JSON.parse(localstorage.getItem("items"));
+
+      items.forEach(function (item, index) {
+        if (updatedItem.id === item.id) {
+          items.splice(index, 1);
+        }
+      });
+      localStorage.setItem("items", JSON.stringify(items));
+    },
   };
 })();
 
@@ -77,17 +87,17 @@ const ItemCtrl = (function () {
   // data structure / state
   const data = {
     // items: [
-      // //   {
-      // //     id: 0,
-      // //     date: "March 3",
-      // //     city: "Atlanta, GA",
-      // //     venue: "Tabernacle",
-      // //     contactname: "Scott Orvold",
-      // //     deal: 10000,
-      // //     deposit: 5000,
-      // //     showtime: 01600,
-      // //     arrival: 01200,
-      // //   },
+    // //   {
+    // //     id: 0,
+    // //     date: "March 3",
+    // //     city: "Atlanta, GA",
+    // //     venue: "Tabernacle",
+    // //     contactname: "Scott Orvold",
+    // //     deal: 10000,
+    // //     deposit: 5000,
+    // //     showtime: 01600,
+    // //     arrival: 01200,
+    // //   },
     // ],
     items: StorageCtrl.getItemsFromStorage(),
     currentItem: null,
@@ -595,6 +605,9 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 
     // delete from ui
     UICtrl.deleteListItem(currentItem.id);
+
+    // delete from local storage
+    StorageCtrl.deleteItemFromStorage(currentItem.id);
 
     // clear state
     UICtrl.clearEditState();
