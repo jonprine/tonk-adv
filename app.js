@@ -256,6 +256,7 @@ const UICtrl = (function () {
     itemDeposit: "#item-deposit",
     itemShowtime: "#item-showtime",
     itemArrival: "#item-arrival",
+    createShow: "#show-create"
   };
 
   // public methods
@@ -447,6 +448,7 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.addBtn).style.display = "inline";
     },
     showEditState: function () {
+      // document.querySelector(UISelectors.createShow).style.display = "block";
       document.querySelector(UISelectors.updateBtn).style.display = "inline";
       document.querySelector(UISelectors.deleteBtn).style.display = "inline";
       document.querySelector(UISelectors.backBtn).style.display = "inline";
