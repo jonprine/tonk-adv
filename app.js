@@ -448,7 +448,7 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.addBtn).style.display = "inline";
     },
     showEditState: function () {
-      // document.querySelector(UISelectors.createShow).style.display = "block";
+      // let showMain = document.querySelector(UISelectors.createShow);
       document.querySelector(UISelectors.updateBtn).style.display = "inline";
       document.querySelector(UISelectors.deleteBtn).style.display = "inline";
       document.querySelector(UISelectors.backBtn).style.display = "inline";
